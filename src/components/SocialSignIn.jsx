@@ -1,6 +1,6 @@
 import React from "react";
 
-const SocialSignIn = () => {
+const SocialSignIn = ({ action }) => {
   return (
     <>
       <div className="flex gap-4">
@@ -8,7 +8,8 @@ const SocialSignIn = () => {
           // onClick={handleGoogleSignIn}
           className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-solid hover:bg-stroke border-stroke p-3.5 text-dark duration-200 ease-in hover:border-gray-5 hover:bg-grey dark:border-border_color dark:text-white dark:hover:bg-darklight"
         >
-          Sign In
+          {action}
+
           <svg
             width="23"
             height="22"
@@ -51,7 +52,8 @@ const SocialSignIn = () => {
           // onClick={handleGithubSignIn}
           className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-solid hover:bg-stroke border-stroke p-3.5 text-dark duration-200 ease-in hover:border-gray-5 hover:bg-grey dark:border-border_color dark:text-white dark:hover:bg-darklight"
         >
-          Sign In
+          {action}
+
           <svg
             width="22"
             height="22"

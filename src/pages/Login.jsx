@@ -12,7 +12,7 @@ const Login = () => {
             <Logo />
           </div>
 
-          <SocialSignIn />
+          <SocialSignIn action="Sign In" />
 
           <span className="z-1 relative my-8 block text-center">
             <span className="-z-1 absolute left-0 top-1/2 block h-px w-full bg-border dark:bg-dark_border"></span>
