@@ -17,7 +17,7 @@ function MainLayout() {
       <Outlet />
     </Layout>
   );
-}
+};
 
 const App = () => {
   return (
