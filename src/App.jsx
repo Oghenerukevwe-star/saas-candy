@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ErrorPage from "./pages/ErrorPage";
+import Portfolio from "./pages/Portfolio";
 
 function MainLayout() {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         {/* Page with layout */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/portfolio" element={<Portfolio />}/>
         </Route>
       </Routes>
     </BrowserRouter>

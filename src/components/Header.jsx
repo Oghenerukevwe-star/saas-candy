@@ -1,30 +1,53 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Logo from "./Logo";
 import { headerData } from "../constants/menuData";
 import HeaderLink from "./HeaderLink";
 import { Icon } from "@iconify/react";
 import { useTheme } from "next-themes";
 import { Link } from "react-router-dom";
+import MobileHeaderLink from "./MobileHeaderLink";
 
 const Header = () => {
   const [sticky, setSticky] = useState(false);
-  const [navbarOpen, setNavbarOpen] = useState(true);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const [isSigInInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const { theme, setTheme } = useTheme();
   const navbarRef = useRef();
   const signInRef = useRef();
-  const SignUpRef = useRef();
+  const signUpRef = useRef();
   const mobileMenuRef = useRef();
 
   const handleScroll = () => {
     setSticky(window.scrollY >= 80);
   };
 
-  // const handleclickOutside = (event) => {
+  const handleclickOutside = (event) => {
+    if (signInRef.current && !signInRef.current.contains(event.target)) {
+      setIsSignInOpen(false);
+    }
+    if (signUpRef.current && !signUpRef.current.contains(event.target)) {
+      setIsSignUpOpen(false);
+    }
+    if (
+      mobileMenuRef.current &&
+      !mobileMenuRef.current.contains(event.target) &&
+      navbarOpen
+    ) {
+      setNavbarOpen(false);
+    }
+  };
 
-  // }
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleclickOutside);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleclickOutside);
+
+    }
+  })
 
   return (
     <header
@@ -64,19 +87,24 @@ const Header = () => {
               className="dark:hidden block"
             />
           </button>
-          <Link to="/login" className="hidden xl:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg outline-none hover:bg-primary hover:text-white duration-500 text-base font-semibold">
-          Sign In
+          <Link
+            to="/login"
+            className="hidden xl:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg outline-none hover:bg-primary hover:text-white duration-500 text-base font-semibold"
+          >
+            Sign In
           </Link>
 
-          <Link to="/signup" className="hidden xl:block bg-primary border border-primary text-white px-4 py-2 rounded-lg outline-none hover:bg-orange-600 duration-500 text-base font-semibold">
-          Sign Up
+          <Link
+            to="/signup"
+            className="hidden xl:block bg-primary border border-primary text-white px-4 py-2 rounded-lg outline-none hover:bg-orange-600 duration-500 text-base font-semibold"
+          >
+            Sign Up
           </Link>
 
-          <button 
-          className="block xl:hidden p-2 rounded-lg"
-          aria-label="Toggle mobile menu"
-          onClick={() => setNavbarOpen(!navbarOpen)}
-
+          <button
+            className="block xl:hidden p-2 rounded-lg"
+            aria-label="Toggle mobile menu"
+            onClick={() => setNavbarOpen(!navbarOpen)}
           >
             <span className="block w-6 h-0.5 bg-primary dark:bg-primary"></span>
             <span className="block w-6 h-0.5 bg-primary dark:bg-primary mt-1.5"></span>
@@ -99,9 +127,8 @@ const Header = () => {
           <button
             onClick={() => setNavbarOpen(false)}
             aria-label="Close mobile menu"
-            >
-
-              <svg
+          >
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -117,10 +144,13 @@ const Header = () => {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-
           </button>
         </div>
-
+        <nav className="flex flex-col items-start p-4">
+          {headerData.map((item, index) => (
+            <MobileHeaderLink key={index} item={item} />
+          ))}
+        </nav>
       </div>
     </header>
   );
