@@ -5,9 +5,9 @@ const ErrorPage = () => {
     <section className="bg-white py-20 dark:bg-darklight lg:py-28">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap items-center">
-          <div className="w-full px-4 md:5/12 lg:6/12">
+          <div className="w-full px-4 md:w-5/12 lg:w-6/12">
             <div className="relative mx-auto aspect-[129/138] max-w-80 text-center">
-              <img src="/404.svg" alt="image" className="mx-auto max-w-full" />
+              <img src="/404.svg" alt="404 page not found illustration" className="mx-auto max-w-full" />
             </div>
           </div>
 
