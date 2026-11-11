@@ -50,9 +50,8 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          <div className="lg:col-span-8 col-span-12 sm:bg-none bg-[url('/hero/right-background.svg')] px-4">
-            <motion.div 
-            {...rightAnimation}>
+          <div className="lg:col-span-6 col-span-12 sm:bg-none bg-[url('/hero/right-background.svg')] px-4">
+            <motion.div {...rightAnimation}>
               <img
                 src="/hero/right-image.png"
                 alt="hero message"
